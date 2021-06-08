@@ -7,7 +7,9 @@ include('functions.php');
 $pdo = connect_to_db();
 
 // idを指定して更新するSQLを作成 -> 実行の処理
-$sql = 'DELETE FROM todo_table WHERE id=:id';
+// $sql = 'DELETE FROM todo_table WHERE id=:id';
+// 論理削除
+$sql = 'UPDATE todo_table SET is_deleted=1 WHERE id=:id';
 
 $stmt = $pdo->prepare($sql);
 $stmt->bindValue(':id', $id, PDO::PARAM_INT);
